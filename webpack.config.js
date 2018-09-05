@@ -1,4 +1,10 @@
+const args = require("minimist")(process.argv.slice(2));
+if (typeof args.mode === "string") {
+    process.env.NODE_ENV = args.mode;
+    console.log("Override NODE_ENV: %s", process.env.NODE_ENV)
+}
 const isDev = process.env.NODE_ENV !== "production";
+
 const { join, resolve } = require("path");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const FriendlyErrorsWebpackPlugin = require("friendly-errors-webpack-plugin");

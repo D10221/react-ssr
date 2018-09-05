@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Layout from "./components/Layout";
 import createStore from "./store";
 
-const store = createStore(window.REDUX_DATA);
+const store = createStore((window as any).REDUX_DATA);
 const jsx = (
     <ReduxProvider store={store}>
         <Router>

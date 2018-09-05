@@ -5,15 +5,17 @@
   "main": "index.js",
   "scripts": {
     "test": "jest --config=./jest.json --ci --env=node",
-    "build": "NODE_ENV=production webpack --progress",
-    "dev": "npm-run-all --parallel server client",
+    "build": "npm run clean && tsc -p ./tsconfig.prod.json && webpack --progress --mode=production",
+    "dev": "npm run clean && npm-run-all --parallel server client",
     "server": "nodemon index.js",
     "client": "webpack --watch --progress",
     "lint": "tslint src",
     "bundlesize": "bundlesize",
-    "precommit": "tslint src --quiet"
+    "precommit": "tslint src --quiet",
+    "clean": "rimraf dist"
   },
   "dependencies": {
+    "minimist": "^1.2.0",
     "react": "latest",
     "react-dom": "latest",
     "react-helmet": "latest",
@@ -38,6 +40,7 @@
     "jest": "latest",
     "nodemon": "latest",
     "npm-run-all": "latest",
+    "rimraf": "^2.6.2",
     "style-loader": "^0.23.0",
     "ts-jest": "^23.1.4",
     "ts-loader": "^5.0.0",
