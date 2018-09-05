@@ -1,13 +1,13 @@
 {
   "name": "react-ssr",
   "version": "1.0.0",
-  "description": "",
+  "description": "fork of https://github.com/alexnm/react-ssr",
   "main": "index.js",
   "scripts": {
     "test": "jest --config=./jest.json --ci --env=node",
     "build": "NODE_ENV=production webpack --progress",
     "dev": "npm-run-all --parallel server client",
-    "server": "nodemon",
+    "server": "nodemon index.js",
     "client": "webpack --watch --progress",
     "lint": "tslint src",
     "bundlesize": "bundlesize",

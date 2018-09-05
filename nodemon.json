@@ -4,7 +4,7 @@
     ],
     "verbose": true,
     "execMap": {
-        "js": "node --inspect -r ts-node/register src/server.ts"
+        "js": "node --inspect -r ts-node/register"
     },
     "watch": [
         "src/"
