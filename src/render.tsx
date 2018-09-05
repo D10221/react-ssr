@@ -7,7 +7,6 @@ import { matchPath, StaticRouter } from "react-router-dom";
 import Layout from "./components/Layout";
 import routes from "./routes";
 import createStore, { initializeSession } from "./store";
-import htmlTemplate from "./html-template";
 
 const render: RequestHandler = async (req, res) => {
 
@@ -23,18 +22,29 @@ const render: RequestHandler = async (req, res) => {
             .map(comp => comp.serverFetch && store.dispatch(comp.serverFetch())); // dispatch data requirement
 
     await Promise.all(dataRequirements);
-    const jsx = (
-        <ReduxProvider store={store}>
-            <StaticRouter context={context} location={req.url}>
-                <Layout />
-            </StaticRouter>
-        </ReduxProvider>
-    );
-    const reactDom = renderToString(jsx);
     const reduxState = store.getState();
     const helmetData = Helmet.renderStatic();
 
     res.writeHead(200, { "Content-Type": "text/html" });
-    res.end(htmlTemplate(reactDom, reduxState, helmetData));
+    res.end("<!DOCTYPE html>" + renderToString(
+        <html>
+            <head>
+                <meta charSet="utf-8" />
+                <title>React SSR</title>
+                {helmetData.title.toComponent()}
+                {helmetData.meta.toComponent()}
+                <script dangerouslySetInnerHTML={{ __html: `window.REDUX_DATA = ${JSON.stringify(reduxState)}` }} />
+            </head>
+            <body>
+                <div id="app">
+                    <ReduxProvider store={store}>
+                        <StaticRouter context={context} location={req.url}>
+                            <Layout />
+                        </StaticRouter>
+                    </ReduxProvider></div>
+                <script src="./app.bundle.js"></script>
+            </body>
+        </html>
+    ));
 }
 export default render;
