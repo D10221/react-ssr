@@ -58,3 +58,11 @@ typings/
 .env
 
 dist
+
+# editors
+.vscode/
+.idea/
+
+# Argumentable
+# but is not multiplatform ...yet?
+# yarn.lock
