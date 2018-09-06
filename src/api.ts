@@ -2,7 +2,7 @@
 export function fetchCircuits() {
     if (typeof window !== "undefined")
         // http://ergast.com/api/f1/2018
-        return fetch("/data/circuits.json")
+        return fetch("/circuits.json")
             .then(res => res.json())
             .then(res => res.MRData.CircuitTable.Circuits);
     //

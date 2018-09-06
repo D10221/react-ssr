@@ -1,14 +1,13 @@
 import React from "react";
-import * as dataStore from "../../store/data";
 
 export default class Home extends React.Component<{
   circuits: { circuitId: any; circuitName: any; Location: any }[];
   fetchData: (...args: any[]) => any;
 }> {
-  static serverFetch = dataStore.fetchData;
-
+  
   componentDidMount() {
     if (this.props.circuits.length <= 0) {
+      console.log("Client Fetching...");
       this.props.fetchData();
     }
   }

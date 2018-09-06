@@ -5,7 +5,11 @@ import Home from "./Home";
 
 const selector = createSelector(dataStore.selector, circuits => ({ circuits }));
 
-export default connect(
+const Connected = connect(
   selector,
   dataStore.bindActions
 )(Home);
+
+(Connected as any).serverFetch = dataStore.fetchData;
+
+export default Connected;
