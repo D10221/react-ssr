@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from "../routes";
-import { Header } from "./header";
+import { Connected as Header } from "./header";
 
 export default class Layout extends React.Component {
     state = {
